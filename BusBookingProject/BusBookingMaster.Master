@@ -1,0 +1,118 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="BusBookingMaster.master.cs" Inherits="BusBookingProject.BusBookingMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>On Line Bus Booking</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            flex: 1;
+        }
+
+        .footer {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+            background-color: #f8f9fa;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Added styles for navbar */
+        .navbar-default .navbar-nav>li>a {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .navbar-default .navbar-nav>li>a:hover,
+        .navbar-default .navbar-nav>li>a:focus {
+            color: #000;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-default .navbar-nav>.active>a,
+        .navbar-default .navbar-nav>.active>a:hover,
+        .navbar-default .navbar-nav>.active>a:focus {
+            color: #000;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: #333;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="wrapper">
+            <div class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="Default.aspx" class="navbar-brand">
+                            Online Bus Booking
+                        </a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a runat="server" href="Default.aspx">Home</a></li>
+                            <li><a runat="server" href="Home.aspx" id="A2" title="Search Buses">Search Buses</a></li>
+                            <% if (Session["UserID"] != null) { %>
+                                <li><a runat="server" href="BookingReport.aspx" id="lnkDashboard">Booking Report</a></li>
+                            <% } %>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if (Session["UserID"] == null) { %>
+                                <li><a runat="server" href="UserRegistration.aspx" id="linkRegister"><i class="glyphicon glyphicon-user"></i> Registration</a></li>
+                                <li><a runat="server" href="Login.aspx" id="linkLogin" title="Login">Login</a></li>
+                            <% } else { %>
+                                <li>
+                                    Hii!!! <asp:Label ID="lblName" runat="server" Font-Bold="true"></asp:Label>
+                                    <asp:Button ID="btnLogout" runat="server" CssClass="alert-success" Text="Logout" OnClick="btnLogout_Click" />
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <section style="width: 49%; float: left;">
+                            &copy; 180141 <%= DateTime.Now.Year %>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </form>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.4.1.js"></script>
+</body>
+</html>
